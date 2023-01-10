@@ -7,11 +7,12 @@ import { productType } from "./data";
 export const CartContext = createContext<{
   state: State;
   dispatch: React.Dispatch<Action>;
-}>({ state: { productsData, amount: 0 }, dispatch: () => null });
+}>({ state: { productsData, amount: 0, total: 0 }, dispatch: () => null });
 
 type State = {
   productsData: productType[];
   amount: number;
+  total: number;
 };
 
 type Action = {
@@ -22,10 +23,18 @@ type Action = {
 const reducer = (state: State, action: Action) => {
   switch (action.type) {
     case "increase": {
-      return { ...state, amount: state.amount + 1 };
+      return {
+        ...state,
+        amount: state.amount + 1,
+        price: state.total + action.payload,
+      };
     }
     case "decrease": {
-      return { ...state, amount: state.amount - 1 };
+      return {
+        ...state,
+        amount: state.amount - 1,
+        price: state.total - action.payload,
+      };
     }
     default: {
       return state;
@@ -37,6 +46,7 @@ function App() {
   const [state, dispatch] = useReducer(reducer, {
     productsData: productsData,
     amount: 0,
+    total: 0,
   });
 
   return (

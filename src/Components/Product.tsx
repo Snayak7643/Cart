@@ -1,15 +1,21 @@
 import React, { useState, useContext } from "react";
 import { CartContext } from "../App";
 
-const Product = () => {
+type PropType = {
+  title: string;
+  img: string;
+  price: number;
+};
+
+const Product: React.FunctionComponent<PropType> = ({ title, img, price }) => {
   const [quantity, setQuantity] = useState<number>(1);
   const { dispatch } = useContext(CartContext);
 
   return (
     <article className="cart-item">
-      <img src="" alt="Phone" />
+      <img src={img} alt="Phone" />
       <div>
-        <h4>Title</h4>
+        <h4>{title}</h4>
         <button className="remove-btn">Remove</button>
       </div>
       <div>
@@ -17,7 +23,7 @@ const Product = () => {
           className="amount-btn"
           onClick={() => {
             setQuantity(quantity + 1);
-            dispatch({ type: "increase", payload: 0 });
+            dispatch({ type: "increase", payload: price });
           }}
         >
           +
@@ -27,7 +33,7 @@ const Product = () => {
           className="amount-btn"
           onClick={() => {
             setQuantity(quantity - 1);
-            dispatch({ type: "decrease", payload: 0 });
+            dispatch({ type: "decrease", payload: price });
           }}
         >
           -
