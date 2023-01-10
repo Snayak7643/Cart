@@ -3,7 +3,7 @@ import { CartContext } from "../App";
 import Product from "./Product";
 
 const ProductList = () => {
-  const { state } = useContext(CartContext);
+  const { state, dispatch } = useContext(CartContext);
 
   return (
     <section className="cart">
@@ -12,8 +12,8 @@ const ProductList = () => {
       </header>
       <div>
         {state.productsData.map((product) => {
-          const { title, img, price } = product;
-          return <Product title={title} img={img} price={price} />;
+          const { id, title, img, price } = product;
+          return <Product id={id} title={title} img={img} price={price} />;
         })}
       </div>
       <footer>
@@ -23,7 +23,17 @@ const ProductList = () => {
             Total: <span>${state.total}</span>
           </h4>
         </div>
-        <button className="btn clear-btn">Clear All</button>
+        <button
+          className="btn clear-btn"
+          onClick={() => {
+            dispatch({
+              type: "clear",
+              payload: { id: 0, price: 0, amount: 0 },
+            });
+          }}
+        >
+          Clear All
+        </button>
       </footer>
     </section>
   );
