@@ -5,6 +5,17 @@ import Product from "./Product";
 const ProductList = () => {
   const { state, dispatch } = useContext(CartContext);
 
+  if (state.productsData.length === 0) {
+    return (
+      <section className="cart">
+        <header>
+          <h2>Your Bag</h2>
+        </header>
+        <p className="empty-cart">No more Items</p>
+      </section>
+    );
+  }
+
   return (
     <section className="cart">
       <header>
