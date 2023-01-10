@@ -7,7 +7,7 @@ import { productType } from "./data";
 export const CartContext = createContext<{
   state: State;
   dispatch: React.Dispatch<Action>;
-}>({ state: { productsData, amount: 0, total: 0 }, dispatch: () => null });
+}>({ state: { productsData, amount: 4, total: 0 }, dispatch: () => null });
 
 type State = {
   productsData: productType[];
@@ -26,14 +26,14 @@ const reducer = (state: State, action: Action) => {
       return {
         ...state,
         amount: state.amount + 1,
-        price: state.total + action.payload,
+        total: state.total + action.payload,
       };
     }
     case "decrease": {
       return {
         ...state,
         amount: state.amount - 1,
-        price: state.total - action.payload,
+        total: state.total - action.payload,
       };
     }
     default: {
@@ -45,7 +45,7 @@ const reducer = (state: State, action: Action) => {
 function App() {
   const [state, dispatch] = useReducer(reducer, {
     productsData: productsData,
-    amount: 0,
+    amount: 4,
     total: 0,
   });
 
