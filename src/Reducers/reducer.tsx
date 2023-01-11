@@ -1,4 +1,10 @@
 import { productType } from "../data";
+import {
+  increaseAmount,
+  decreaseAmount,
+  remove,
+  set_initial,
+} from "./functions";
 
 export type State = {
   productsData: productType[];
@@ -19,39 +25,25 @@ const reducer = (state: State, action: Action) => {
   //desctructuring the payload
   const { id, amount, price } = action.payload;
 
-  //the cases for which function to run
   switch (action.type) {
     //initial Fetch
     case "set_initial": {
-      return { ...state, amount: amount, total: price };
+      return set_initial(state, amount, price);
     }
 
     //Increase quantity
     case "increase": {
-      return {
-        ...state,
-        amount: state.amount + amount,
-        total: state.total + price,
-      };
+      return increaseAmount(state, price);
     }
 
     //Decrease quantity
     case "decrease": {
-      return {
-        ...state,
-        amount: state.amount - amount,
-        total: Math.round(state.total - amount * price),
-      };
+      return decreaseAmount(state, amount, price);
     }
 
     //Remove a product
     case "remove": {
-      return {
-        ...state,
-        productsData: state.productsData.filter((product) => {
-          return product.id !== id;
-        }),
-      };
+      return remove(state, id);
     }
 
     //Clear

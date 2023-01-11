@@ -23,6 +23,7 @@ function App() {
       type: "set_initial",
       payload: { id: 0, amount: 4, price: total },
     });
+    console.log(total);
   }, []);
 
   //The component
