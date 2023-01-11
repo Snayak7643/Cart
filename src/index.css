@@ -121,6 +121,9 @@ Navbar
 nav {
   background: var(--clr-primary);
   padding: 1.25rem 2rem;
+  position: sticky;
+  left: 0;
+  top: 0;
 }
 .nav-center {
   max-width: var(--fixed-width);
