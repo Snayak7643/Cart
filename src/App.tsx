@@ -1,17 +1,9 @@
-import React, { createContext, useReducer } from "react";
+import React, { useReducer } from "react";
 import Navbar from "./Components/Navbar";
 import ProductList from "./Components/ProductList";
 import productsData from "./data";
 import { reducer } from "./Reducers/reducer";
-import { State, Action } from "./Reducers/reducer";
-
-export const CartContext = createContext<{
-  state: State;
-  dispatch: React.Dispatch<Action>;
-}>({
-  state: { productsData, amount: 4, total: 2599.96 },
-  dispatch: () => null,
-});
+import CartContext from "./Contexts/CartContext";
 
 function App() {
   const [state, dispatch] = useReducer(reducer, {
