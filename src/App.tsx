@@ -1,16 +1,12 @@
 import React, { useReducer } from "react";
 import Navbar from "./Components/Navbar";
 import ProductList from "./Components/ProductList";
-import productsData from "./data";
 import { reducer } from "./Reducers/reducer";
 import CartContext from "./Contexts/CartContext";
+import { initialCartState } from "./Constants/InitialCartState";
 
 function App() {
-  const [state, dispatch] = useReducer(reducer, {
-    productsData: productsData,
-    amount: 4,
-    total: 2599.96,
-  });
+  const [state, dispatch] = useReducer(reducer, initialCartState);
 
   return (
     <CartContext.Provider value={{ state, dispatch }}>
