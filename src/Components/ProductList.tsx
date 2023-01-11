@@ -5,6 +5,8 @@ import Product from "./Product";
 const ProductList = () => {
   const { state, dispatch } = useContext(CartContext);
 
+  //If the Cart is Empty
+
   if (state.productsData.length === 0) {
     return (
       <section className="cart">
@@ -16,16 +18,19 @@ const ProductList = () => {
     );
   }
 
+  //If the Cart Has Items
   return (
     <section className="cart">
       <header>
         <h2>Your Bag</h2>
       </header>
+      {/* Rendering Products */}
       <div>
         {state.productsData.map((product) => {
           return <Product key={product.id} product={product} />;
         })}
       </div>
+      {/* Total Section */}
       <footer>
         <hr />
         <div className="cart-total">
@@ -33,6 +38,7 @@ const ProductList = () => {
             Total: <span>${state.total}</span>
           </h4>
         </div>
+        {/* Clear-All Button */}
         <button
           className="btn clear-btn"
           onClick={() => {

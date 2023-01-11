@@ -7,8 +7,10 @@ import { initialCartState } from "./Constants/InitialCartState";
 import productsData from "./data";
 
 function App() {
+  //The reducer
   const [state, dispatch] = useReducer(reducer, initialCartState);
 
+  //useEffect is added for if we fetching data from Api
   useEffect(() => {
     let total = 0;
     const calculateTotal = () => {
@@ -21,9 +23,9 @@ function App() {
       type: "set_initial",
       payload: { id: 0, amount: 4, price: total },
     });
-    console.log(total);
   }, []);
 
+  //The component
   return (
     <CartContext.Provider value={{ state, dispatch }}>
       <main>
