@@ -1,5 +1,6 @@
 import React, { useState, useContext } from "react";
 import { CartContext } from "../App";
+import { FcCollapse, FcExpand } from "react-icons/fc";
 
 type PropType = {
   id: number;
@@ -50,7 +51,7 @@ const Product: React.FunctionComponent<PropType> = ({
             dispatch({ type: "increase", payload: { id, amount: 1, price } });
           }}
         >
-          +
+          <FcCollapse />
         </button>
         <p className="amount">{quantity}</p>
         <button
@@ -60,7 +61,7 @@ const Product: React.FunctionComponent<PropType> = ({
             dispatch({ type: "decrease", payload: { id, amount: 1, price } });
           }}
         >
-          -
+          <FcExpand />
         </button>
       </div>
     </article>
