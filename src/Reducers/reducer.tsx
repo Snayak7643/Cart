@@ -16,28 +16,27 @@ export type Action = {
 };
 
 const reducer = (state: State, action: Action) => {
+  const { id, amount, price } = action.payload;
   switch (action.type) {
     case "increase": {
       return {
         ...state,
-        amount: state.amount + action.payload.amount,
-        total: state.total + action.payload.price,
+        amount: state.amount + amount,
+        total: state.total + price,
       };
     }
     case "decrease": {
       return {
         ...state,
-        amount: state.amount - action.payload.amount,
-        total: Math.round(
-          state.total - action.payload.amount * action.payload.price
-        ),
+        amount: state.amount - amount,
+        total: Math.round(state.total - amount * price),
       };
     }
     case "remove": {
       return {
         ...state,
         productsData: state.productsData.filter((product) => {
-          return product.id !== action.payload.id;
+          return product.id !== id;
         }),
       };
     }
