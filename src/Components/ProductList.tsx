@@ -24,7 +24,9 @@ const ProductList = () => {
       <div>
         {state.productsData.map((product) => {
           const { id, title, img, price } = product;
-          return <Product id={id} title={title} img={img} price={price} />;
+          return (
+            <Product key={id} id={id} title={title} img={img} price={price} />
+          );
         })}
       </div>
       <footer>
