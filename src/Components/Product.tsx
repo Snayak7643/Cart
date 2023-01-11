@@ -1,22 +1,17 @@
 import React, { useState, useContext } from "react";
 import CartContext from "../Contexts/CartContext";
 import { FcCollapse, FcExpand } from "react-icons/fc";
+import { productType } from "../data";
 
 type PropType = {
-  id: number;
-  title: string;
-  img: string;
-  price: number;
+  product: productType;
 };
 
-const Product: React.FunctionComponent<PropType> = ({
-  id,
-  title,
-  img,
-  price,
-}) => {
+const Product: React.FunctionComponent<PropType> = ({ product }) => {
   const [quantity, setQuantity] = useState<number>(1);
   const { dispatch } = useContext(CartContext);
+
+  const { id, img, title, price } = product;
 
   if (quantity === 0) {
     dispatch({ type: "remove", payload: { id, amount: 0, price: 0 } });

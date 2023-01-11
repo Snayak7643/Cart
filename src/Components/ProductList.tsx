@@ -23,10 +23,7 @@ const ProductList = () => {
       </header>
       <div>
         {state.productsData.map((product) => {
-          const { id, title, img, price } = product;
-          return (
-            <Product key={id} id={id} title={title} img={img} price={price} />
-          );
+          return <Product key={product.id} product={product} />;
         })}
       </div>
       <footer>
