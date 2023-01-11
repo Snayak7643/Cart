@@ -1,7 +1,7 @@
 import React, { useState, useContext } from "react";
 import CartContext from "../Contexts/CartContext";
 import { FcCollapse, FcExpand } from "react-icons/fc";
-import { productType } from "../data";
+import { productType } from "../type";
 import ACTIONS from "../Constants/actions";
 
 type PropType = {

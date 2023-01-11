@@ -1,4 +1,4 @@
-import { State } from "./reducer";
+import { State } from "../type";
 
 export const increaseAmount = (state: State, price: number) => {
   return { ...state, amount: state.amount + 1, total: state.total + price };

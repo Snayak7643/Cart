@@ -1,4 +1,4 @@
-import { productType } from "../data";
+import { State, Action } from "../type";
 import {
   increaseAmount,
   decreaseAmount,
@@ -6,21 +6,6 @@ import {
   set_initial,
 } from "./functions";
 import ACTIONS from "../Constants/actions";
-
-export type State = {
-  productsData: productType[];
-  amount: number;
-  total: number;
-};
-
-export type Action = {
-  type: string;
-  payload: {
-    id: number;
-    amount: number;
-    price: number;
-  };
-};
 
 const reducer = (state: State, action: Action) => {
   //desctructuring the payload

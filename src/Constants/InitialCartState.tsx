@@ -1,5 +1,5 @@
 import productsData from "../data";
-import { State } from "../Reducers/reducer";
+import { State } from "../type";
 
 export const initialCartState: State = {
   productsData,
