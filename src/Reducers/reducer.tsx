@@ -25,7 +25,6 @@ const reducer = (state: State, action: Action) => {
       };
     }
     case "decrease": {
-      console.log(action.payload);
       return {
         ...state,
         amount: state.amount - action.payload.amount,

@@ -17,6 +17,10 @@ const Product: React.FunctionComponent<PropType> = ({
   const [quantity, setQuantity] = useState<number>(1);
   const { dispatch } = useContext(CartContext);
 
+  if (quantity === 0) {
+    dispatch({ type: "remove", payload: { id, amount: 0, price: 0 } });
+  }
+
   return (
     <article className="cart-item">
       <img src={img} alt="Phone" />
