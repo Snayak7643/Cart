@@ -5,6 +5,7 @@ import {
   remove,
   set_initial,
 } from "./functions";
+import ACTIONS from "../Constants/actions";
 
 export type State = {
   productsData: productType[];
@@ -27,27 +28,27 @@ const reducer = (state: State, action: Action) => {
 
   switch (action.type) {
     //initial Fetch
-    case "set_initial": {
+    case ACTIONS.SET_INITIAL: {
       return set_initial(state, amount, price);
     }
 
     //Increase quantity
-    case "increase": {
+    case ACTIONS.INCREASE: {
       return increaseAmount(state, price);
     }
 
     //Decrease quantity
-    case "decrease": {
+    case ACTIONS.DECREASE: {
       return decreaseAmount(state, amount, price);
     }
 
     //Remove a product
-    case "remove": {
+    case ACTIONS.REMOVE: {
       return remove(state, id);
     }
 
     //Clear
-    case "clear": {
+    case ACTIONS.CLEAR: {
       return {
         productsData: [],
         amount: 0,

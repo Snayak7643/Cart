@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import CartContext from "../Contexts/CartContext";
 import Product from "./Product";
+import ACTIONS from "../Constants/actions";
 
 const ProductList = () => {
   const { state, dispatch } = useContext(CartContext);
@@ -43,7 +44,7 @@ const ProductList = () => {
           className="btn clear-btn"
           onClick={() => {
             dispatch({
-              type: "clear",
+              type: ACTIONS.CLEAR,
               payload: { id: 0, price: 0, amount: 0 },
             });
           }}
