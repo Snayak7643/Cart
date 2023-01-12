@@ -1,6 +1,7 @@
 import React, { useReducer, useEffect } from "react";
 import Navbar from "./Components/Navbar";
 import ProductList from "./Components/ProductList/index";
+import Total from "./Components/Total";
 import { reducer } from "./Reducers/reducer";
 import CartContext from "./Contexts/CartContext";
 import { initialCartState } from "./Constants/InitialCartState";
@@ -21,7 +22,13 @@ function App() {
     <CartContext.Provider value={{ state, dispatch }}>
       <main>
         <Navbar />
-        <ProductList />
+        <section className="cart">
+          <header>
+            <h2>Your Bag</h2>
+          </header>
+          <ProductList />
+          <Total />
+        </section>
       </main>
     </CartContext.Provider>
   );

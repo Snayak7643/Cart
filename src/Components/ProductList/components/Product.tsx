@@ -56,6 +56,9 @@ const Product: React.FunctionComponent<PropType> = ({ product }) => {
         <button
           className="amount-btn"
           onClick={() => {
+            if (quantity === 1) {
+              return dispatch(remove(id, 1));
+            }
             setQuantity(quantity - 1);
             dispatch(decreaseAmount(id, 1));
           }}
