@@ -4,8 +4,9 @@ import { initialCartState } from "../Constants/InitialCartState";
 
 const reducer = (state: State, action: Action) => {
   //desctructuring the payload
-  const { id, quantity, price } = action.payload;
+  const { id, quantity } = action.payload;
 
+  console.log(state);
   switch (action.type) {
     //initial Fetch
     case ACTIONS.SET_INITIAL: {
@@ -48,18 +49,24 @@ const reducer = (state: State, action: Action) => {
         ...state,
         totalQuantity: state.totalQuantity - product[0].quantity,
         totalPrice:
-          Math.round((state.totalPrice - quantity * product[0].price) * 100) /
-          100,
+          Math.round((state.totalPrice - product[0].price) * 100) / 100,
       };
     }
 
     //Remove a product
     case ACTIONS.REMOVE: {
+      const product = state.productsData.filter((product) => {
+        return product.id === id;
+      });
       return {
         ...state,
         productsData: state.productsData.filter((product) => {
           return product.id !== id;
         }),
+        totalQuantity: state.totalQuantity - quantity,
+        totalPrice:
+          Math.round((state.totalPrice - quantity * product[0].price) * 100) /
+          100,
       };
     }
 

@@ -16,7 +16,7 @@ type PropType = {
 const Product: React.FunctionComponent<PropType> = ({ product }) => {
   const [quantity, setQuantity] = useState<number>(1);
   const { dispatch } = useContext(CartContext);
-  const { id, img, title, price } = product;
+  const { id, img, title } = product;
 
   //Remove the product if quantity tends to 0
   if (quantity === 0) {
@@ -33,8 +33,7 @@ const Product: React.FunctionComponent<PropType> = ({ product }) => {
         <button
           className="remove-btn"
           onClick={() => {
-            dispatch(decreaseAmount(id, quantity));
-            dispatch(remove(id));
+            dispatch(remove(id, quantity));
           }}
         >
           Remove
