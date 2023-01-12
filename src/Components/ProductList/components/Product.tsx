@@ -1,8 +1,7 @@
-import React, { useState, useContext } from "react";
+import React, { useContext } from "react";
 import CartContext from "../../../Contexts/CartContext";
 import { FcCollapse, FcExpand } from "react-icons/fc";
 import { productType } from "../../../type";
-import ACTIONS from "../../../Constants/actionNames";
 import {
   increaseAmount,
   decreaseAmount,
@@ -14,14 +13,10 @@ type PropType = {
 };
 
 const Product: React.FunctionComponent<PropType> = ({ product }) => {
-  const [quantity, setQuantity] = useState<number>(1);
   const { dispatch } = useContext(CartContext);
   const { id, img, title } = product;
 
   //Remove the product if quantity tends to 0
-  if (quantity === 0) {
-    dispatch({ type: ACTIONS.REMOVE, payload: { id, quantity: 0, price: 0 } });
-  }
 
   return (
     <article className="cart-item">
@@ -44,7 +39,6 @@ const Product: React.FunctionComponent<PropType> = ({ product }) => {
         <button
           className="amount-btn"
           onClick={() => {
-            setQuantity(quantity + 1);
             dispatch(increaseAmount(id));
           }}
         >
@@ -56,10 +50,9 @@ const Product: React.FunctionComponent<PropType> = ({ product }) => {
         <button
           className="amount-btn"
           onClick={() => {
-            if (quantity === 1) {
+            if (product.quantity === 1) {
               return dispatch(remove(id));
             }
-            setQuantity(quantity - 1);
             dispatch(decreaseAmount(id));
           }}
         >
