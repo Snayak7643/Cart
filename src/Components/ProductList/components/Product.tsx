@@ -20,7 +20,7 @@ const Product: React.FunctionComponent<PropType> = ({ product }) => {
 
   //Remove the product if quantity tends to 0
   if (quantity === 0) {
-    dispatch({ type: ACTIONS.REMOVE, payload: { id, amount: 0, price: 0 } });
+    dispatch({ type: ACTIONS.REMOVE, payload: { id, quantity: 0, price: 0 } });
   }
 
   return (

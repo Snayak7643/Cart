@@ -8,15 +8,15 @@ export type productType = {
 
 export type State = {
   productsData: productType[];
-  amount: number;
-  total: number;
+  totalQuantity: number;
+  totalPrice: number;
 };
 
 export type Action = {
   type: string;
   payload: {
     id: number;
-    amount: number;
+    quantity: number;
     price: number;
   };
 };

@@ -36,7 +36,7 @@ const ProductList = () => {
         <hr />
         <div className="cart-total">
           <h4>
-            Total: <span>${state.total}</span>
+            Total: <span>${state.totalPrice}</span>
           </h4>
         </div>
         {/* Clear-All Button */}
@@ -45,7 +45,7 @@ const ProductList = () => {
           onClick={() => {
             dispatch({
               type: ACTIONS.CLEAR,
-              payload: { id: 0, price: 0, amount: 0 },
+              payload: { id: 0, price: 0, quantity: 0 },
             });
           }}
         >

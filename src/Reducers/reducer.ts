@@ -3,7 +3,7 @@ import ACTIONS from "../Constants/actionNames";
 
 const reducer = (state: State, action: Action) => {
   //desctructuring the payload
-  const { id, amount, price } = action.payload;
+  const { id, quantity, price } = action.payload;
 
   switch (action.type) {
     //initial Fetch
@@ -14,15 +14,19 @@ const reducer = (state: State, action: Action) => {
         sum = sum + product.price;
       });
 
-      return { ...state, amount: state.productsData.length, total: sum };
+      return {
+        ...state,
+        totalQuantity: state.productsData.length,
+        totalPrice: sum,
+      };
     }
 
     //Increase quantity
     case ACTIONS.INCREASE: {
       return {
         ...state,
-        amount: state.amount + 1,
-        total: Math.round((state.total + price) * 100) / 100,
+        totalQuantity: state.totalQuantity + 1,
+        totalPrice: Math.round((state.totalPrice + price) * 100) / 100,
       };
     }
 
@@ -30,8 +34,9 @@ const reducer = (state: State, action: Action) => {
     case ACTIONS.DECREASE: {
       return {
         ...state,
-        amount: state.amount - amount,
-        total: Math.round((state.total - amount * price) * 100) / 100,
+        totalQuantity: state.totalQuantity - quantity,
+        totalPrice:
+          Math.round((state.totalPrice - quantity * price) * 100) / 100,
       };
     }
 
@@ -49,8 +54,8 @@ const reducer = (state: State, action: Action) => {
     case ACTIONS.CLEAR: {
       return {
         productsData: [],
-        amount: 0,
-        total: 0,
+        totalQuantity: 0,
+        totalPrice: 0,
       };
     }
 
