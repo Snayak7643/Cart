@@ -1,11 +1,6 @@
 import { State, Action } from "../type";
-import {
-  increaseAmount,
-  decreaseAmount,
-  remove,
-  set_initial,
-} from "./functions";
-import ACTIONS from "../Constants/actions";
+import { increaseAmount, decreaseAmount, remove, set_initial } from "./actions";
+import ACTIONS from "../Constants/actionNames";
 
 const reducer = (state: State, action: Action) => {
   //desctructuring the payload

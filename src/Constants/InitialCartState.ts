@@ -3,6 +3,6 @@ import { State } from "../type";
 
 export const initialCartState: State = {
   productsData,
-  amount: 4,
-  total: 2599.96,
+  amount: 0,
+  total: 0,
 };

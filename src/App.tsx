@@ -1,11 +1,11 @@
 import React, { useReducer, useEffect } from "react";
 import Navbar from "./Components/Navbar";
-import ProductList from "./Components/ProductList";
+import ProductList from "./Components/ProductList/index";
 import { reducer } from "./Reducers/reducer";
 import CartContext from "./Contexts/CartContext";
 import { initialCartState } from "./Constants/InitialCartState";
 import productsData from "./data";
-import ACTIONS from "./Constants/actions";
+import ACTIONS from "./Constants/actionNames";
 
 function App() {
   //The reducer
