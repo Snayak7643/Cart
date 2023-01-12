@@ -14,9 +14,5 @@ export type State = {
 
 export type Action = {
   type: string;
-  payload: {
-    id: number;
-    quantity: number;
-    price: number;
-  };
+  payload: any;
 };

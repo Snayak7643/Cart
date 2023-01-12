@@ -1,5 +1,6 @@
-import { State, Action } from "../type";
+import { State, Action, productType } from "../type";
 import ACTIONS from "../Constants/actionNames";
+import { initialCartState } from "../Constants/InitialCartState";
 
 const reducer = (state: State, action: Action) => {
   //desctructuring the payload
@@ -8,14 +9,16 @@ const reducer = (state: State, action: Action) => {
   switch (action.type) {
     //initial Fetch
     case ACTIONS.SET_INITIAL: {
-      let sum = 0;
+      const { productsData } = action.payload;
 
-      state.productsData.forEach((product) => {
+      let sum = 0;
+      productsData.forEach((product: productType) => {
         sum = sum + product.price;
       });
 
       return {
         ...state,
+        productsData,
         totalQuantity: state.productsData.length,
         totalPrice: sum,
       };
@@ -23,20 +26,30 @@ const reducer = (state: State, action: Action) => {
 
     //Increase quantity
     case ACTIONS.INCREASE: {
+      const product = state.productsData.filter((product) => {
+        return product.id === id;
+      });
+
       return {
         ...state,
-        totalQuantity: state.totalQuantity + 1,
-        totalPrice: Math.round((state.totalPrice + price) * 100) / 100,
+        totalQuantity: state.totalQuantity + product[0].quantity,
+        totalPrice:
+          Math.round((state.totalPrice + product[0].price) * 100) / 100,
       };
     }
 
     //Decrease quantity
     case ACTIONS.DECREASE: {
+      const product = state.productsData.filter((product) => {
+        return product.id === id;
+      });
+
       return {
         ...state,
-        totalQuantity: state.totalQuantity - quantity,
+        totalQuantity: state.totalQuantity - product[0].quantity,
         totalPrice:
-          Math.round((state.totalPrice - quantity * price) * 100) / 100,
+          Math.round((state.totalPrice - quantity * product[0].price) * 100) /
+          100,
       };
     }
 
@@ -52,11 +65,7 @@ const reducer = (state: State, action: Action) => {
 
     //Clear
     case ACTIONS.CLEAR: {
-      return {
-        productsData: [],
-        totalQuantity: 0,
-        totalPrice: 0,
-      };
+      return initialCartState;
     }
 
     //Default

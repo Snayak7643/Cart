@@ -4,6 +4,7 @@ import ProductList from "./Components/ProductList/index";
 import { reducer } from "./Reducers/reducer";
 import CartContext from "./Contexts/CartContext";
 import { initialCartState } from "./Constants/InitialCartState";
+import productsData from "./data";
 import { set_initial } from "./Reducers/actions";
 
 function App() {
@@ -12,7 +13,7 @@ function App() {
 
   //useEffect is added for if we fetching data from Api
   useEffect(() => {
-    dispatch(set_initial());
+    dispatch(set_initial(productsData));
   }, []);
 
   //The component

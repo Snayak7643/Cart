@@ -1,8 +1,7 @@
-import productsData from "../data";
 import { State } from "../type";
 
 export const initialCartState: State = {
-  productsData,
+  productsData: [],
   totalQuantity: 0,
   totalPrice: 0,
 };

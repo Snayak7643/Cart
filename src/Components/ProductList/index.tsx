@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import CartContext from "../../Contexts/CartContext";
 import Product from "./components/Product";
-import ACTIONS from "../../Constants/actionNames";
+import { clear } from "../../Reducers/actions";
 
 const ProductList = () => {
   const { state, dispatch } = useContext(CartContext);
@@ -43,10 +43,7 @@ const ProductList = () => {
         <button
           className="btn clear-btn"
           onClick={() => {
-            dispatch({
-              type: ACTIONS.CLEAR,
-              payload: { id: 0, price: 0, quantity: 0 },
-            });
+            dispatch(clear());
           }}
         >
           Clear All
