@@ -5,12 +5,12 @@ export const increaseAmount = (id: number) => {
   return { type: ACTIONS.INCREASE, payload: { id } };
 };
 
-export const decreaseAmount = (id: number, quantity: number) => {
-  return { type: ACTIONS.DECREASE, payload: { id, quantity } };
+export const decreaseAmount = (id: number) => {
+  return { type: ACTIONS.DECREASE, payload: { id } };
 };
 
-export const remove = (id: number, quantity: number) => {
-  return { type: ACTIONS.REMOVE, payload: { id, quantity } };
+export const remove = (id: number) => {
+  return { type: ACTIONS.REMOVE, payload: { id } };
 };
 
 export const set_initial = (productsData: productType[]) => {

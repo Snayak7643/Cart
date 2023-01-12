@@ -33,7 +33,7 @@ const Product: React.FunctionComponent<PropType> = ({ product }) => {
         <button
           className="remove-btn"
           onClick={() => {
-            dispatch(remove(id, quantity));
+            dispatch(remove(id));
           }}
         >
           Remove
@@ -50,17 +50,17 @@ const Product: React.FunctionComponent<PropType> = ({ product }) => {
         >
           <FcCollapse />
         </button>
-        <p className="amount">{quantity}</p>
+        <p className="amount">{product.quantity}</p>
 
         {/* Decrease Button */}
         <button
           className="amount-btn"
           onClick={() => {
             if (quantity === 1) {
-              return dispatch(remove(id, 1));
+              return dispatch(remove(id));
             }
             setQuantity(quantity - 1);
-            dispatch(decreaseAmount(id, 1));
+            dispatch(decreaseAmount(id));
           }}
         >
           <FcExpand />

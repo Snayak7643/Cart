@@ -4,9 +4,11 @@ import { initialCartState } from "../Constants/InitialCartState";
 
 const reducer = (state: State, action: Action) => {
   //desctructuring the payload
-  const { id, quantity } = action.payload;
+  const { id } = action.payload;
+  const product = state.productsData.filter((product) => {
+    return product.id === id;
+  });
 
-  console.log(state);
   switch (action.type) {
     //initial Fetch
     case ACTIONS.SET_INITIAL: {
@@ -27,13 +29,19 @@ const reducer = (state: State, action: Action) => {
 
     //Increase quantity
     case ACTIONS.INCREASE: {
-      const product = state.productsData.filter((product) => {
-        return product.id === id;
+      const newProductsData = state.productsData.map((product) => {
+        if (product.id === id) {
+          return {
+            ...product,
+            quantity: product.quantity + 1,
+          };
+        }
+        return product;
       });
-
       return {
         ...state,
-        totalQuantity: state.totalQuantity + product[0].quantity,
+        productsData: newProductsData,
+        totalQuantity: state.totalQuantity + 1,
         totalPrice:
           Math.round((state.totalPrice + product[0].price) * 100) / 100,
       };
@@ -41,13 +49,20 @@ const reducer = (state: State, action: Action) => {
 
     //Decrease quantity
     case ACTIONS.DECREASE: {
-      const product = state.productsData.filter((product) => {
-        return product.id === id;
+      const newProductsData = state.productsData.map((product) => {
+        if (product.id === id) {
+          return {
+            ...product,
+            quantity: product.quantity - 1,
+          };
+        }
+        return product;
       });
 
       return {
         ...state,
-        totalQuantity: state.totalQuantity - product[0].quantity,
+        productsData: newProductsData,
+        totalQuantity: state.totalQuantity - 1,
         totalPrice:
           Math.round((state.totalPrice - product[0].price) * 100) / 100,
       };
@@ -55,18 +70,16 @@ const reducer = (state: State, action: Action) => {
 
     //Remove a product
     case ACTIONS.REMOVE: {
-      const product = state.productsData.filter((product) => {
-        return product.id === id;
-      });
       return {
         ...state,
         productsData: state.productsData.filter((product) => {
           return product.id !== id;
         }),
-        totalQuantity: state.totalQuantity - quantity,
+        totalQuantity: state.totalQuantity - product[0].quantity,
         totalPrice:
-          Math.round((state.totalPrice - quantity * product[0].price) * 100) /
-          100,
+          Math.round(
+            (state.totalPrice - product[0].quantity * product[0].price) * 100
+          ) / 100,
       };
     }
 
