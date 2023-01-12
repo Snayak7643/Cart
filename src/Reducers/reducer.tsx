@@ -1,5 +1,4 @@
 import { State, Action } from "../type";
-import { increaseAmount, decreaseAmount, remove, set_initial } from "./actions";
 import ACTIONS from "../Constants/actionNames";
 
 const reducer = (state: State, action: Action) => {
@@ -9,22 +8,41 @@ const reducer = (state: State, action: Action) => {
   switch (action.type) {
     //initial Fetch
     case ACTIONS.SET_INITIAL: {
-      return set_initial(state, amount, price);
+      let sum = 0;
+
+      state.productsData.forEach((product) => {
+        sum = sum + product.price;
+      });
+
+      return { ...state, amount: state.productsData.length, total: sum };
     }
 
     //Increase quantity
     case ACTIONS.INCREASE: {
-      return increaseAmount(state, price);
+      return {
+        ...state,
+        amount: state.amount + 1,
+        total: Math.round((state.total + price) * 100) / 100,
+      };
     }
 
     //Decrease quantity
     case ACTIONS.DECREASE: {
-      return decreaseAmount(state, amount, price);
+      return {
+        ...state,
+        amount: state.amount - amount,
+        total: Math.round((state.total - amount * price) * 100) / 100,
+      };
     }
 
     //Remove a product
     case ACTIONS.REMOVE: {
-      return remove(state, id);
+      return {
+        ...state,
+        productsData: state.productsData.filter((product) => {
+          return product.id !== id;
+        }),
+      };
     }
 
     //Clear

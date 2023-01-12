@@ -3,6 +3,11 @@ import CartContext from "../../../Contexts/CartContext";
 import { FcCollapse, FcExpand } from "react-icons/fc";
 import { productType } from "../../../type";
 import ACTIONS from "../../../Constants/actionNames";
+import {
+  increaseAmount,
+  decreaseAmount,
+  remove,
+} from "../../../Reducers/actions";
 
 type PropType = {
   product: productType;
@@ -28,14 +33,8 @@ const Product: React.FunctionComponent<PropType> = ({ product }) => {
         <button
           className="remove-btn"
           onClick={() => {
-            dispatch({
-              type: ACTIONS.DECREASE,
-              payload: { id, amount: quantity, price },
-            });
-            dispatch({
-              type: ACTIONS.REMOVE,
-              payload: { id, amount: quantity, price },
-            });
+            dispatch(decreaseAmount(quantity, price));
+            dispatch(remove(id));
           }}
         >
           Remove
@@ -47,10 +46,7 @@ const Product: React.FunctionComponent<PropType> = ({ product }) => {
           className="amount-btn"
           onClick={() => {
             setQuantity(quantity + 1);
-            dispatch({
-              type: ACTIONS.INCREASE,
-              payload: { id, amount: 1, price },
-            });
+            dispatch(increaseAmount(price));
           }}
         >
           <FcCollapse />
@@ -62,10 +58,7 @@ const Product: React.FunctionComponent<PropType> = ({ product }) => {
           className="amount-btn"
           onClick={() => {
             setQuantity(quantity - 1);
-            dispatch({
-              type: ACTIONS.DECREASE,
-              payload: { id, amount: 1, price },
-            });
+            dispatch(decreaseAmount(1, price));
           }}
         >
           <FcExpand />

@@ -3,7 +3,7 @@ export type productType = {
   title: string;
   price: number;
   img: string;
-  amount: number;
+  quantity: number;
 };
 
 export type State = {

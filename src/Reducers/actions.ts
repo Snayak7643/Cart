@@ -1,30 +1,17 @@
-import { State } from "../type";
+import ACTIONS from "../Constants/actionNames";
 
-export const increaseAmount = (state: State, price: number) => {
-  return {
-    ...state,
-    amount: state.amount + 1,
-    total: Math.round((state.total + price) * 100) / 100,
-  };
+export const increaseAmount = (price: number) => {
+  return { type: ACTIONS.INCREASE, payload: { id: 0, amount: 0, price } };
 };
 
-export const decreaseAmount = (state: State, amount: number, price: number) => {
-  return {
-    ...state,
-    amount: state.amount - amount,
-    total: Math.round((state.total - amount * price) * 100) / 100,
-  };
+export const decreaseAmount = (amount: number, price: number) => {
+  return { type: ACTIONS.DECREASE, payload: { id: 0, amount, price } };
 };
 
-export const remove = (state: State, id: number) => {
-  return {
-    ...state,
-    productsData: state.productsData.filter((product) => {
-      return product.id !== id;
-    }),
-  };
+export const remove = (id: number) => {
+  return { type: ACTIONS.REMOVE, payload: { id, amount: 0, price: 0 } };
 };
 
-export const set_initial = (state: State, amount: number, total: number) => {
-  return { ...state, amount, total };
+export const set_initial = () => {
+  return { type: ACTIONS.SET_INITIAL, payload: { id: 0, amount: 0, price: 0 } };
 };
