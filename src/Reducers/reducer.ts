@@ -22,7 +22,7 @@ const reducer = (state: State, action: Action) => {
       return {
         ...state,
         productsData,
-        totalQuantity: state.productsData.length,
+        totalQuantity: productsData.length,
         totalPrice: sum,
       };
     }
